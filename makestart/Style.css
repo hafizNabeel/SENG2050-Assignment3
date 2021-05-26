@@ -1,0 +1,56 @@
+html{
+	background-color:#C5F4E0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	}
+	
+.header{
+	text-align:center;
+	color:#b72020;
+
+}
+
+.body{
+	text-align:center;
+
+}
+
+
+.h3{
+	text-align:center;
+}
+
+input.comments{
+    width: 50%;
+    height: 200px;
+}
+
+
+
+
+
+footer{
+	text-align:left;
+	position: absolute;
+	bottom: 0;
+	color: black;
+
+}
+
+
+
+button{
+	border: 5px solid transparent;
+    background: #1a3c6f;
+    color: white;
+    border-radius: 50px;
+    width: 25%;
+    cursor: pointer;
+	margin: 1px;
+	border-radius: 5px;
+	
+  }
+  
+
+ 
+ 
