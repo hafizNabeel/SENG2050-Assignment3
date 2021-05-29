@@ -40,18 +40,18 @@ public class Main extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       	
 
-		String user = request.getParameter("username");
+		String user = request.getParameter("email");
 		String pass = request.getParameter("password");
 		String fiestName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		int phoneNumber = Integer. parseInt(request.getParameter("phoneNumber"));
-		String roleInSystem = request.getParameter("roleInSystem");
-		PersonBean person = new PersonBean(fiestName, lastName, user, pass, phoneNumber, roleInSystem);
+		String phoneNumber = request.getParameter("phoneNumber");
+		PersonBean person = new PersonBean(fiestName, lastName, user, pass, phoneNumber);
 		
 		
 		//testing
 		LoginBean login = new LoginBean(person);
-		login.addUser(person);
+		login.addUser();
+		System.out.println("fbvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
 		
     }
 

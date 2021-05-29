@@ -16,14 +16,17 @@ import java.sql.SQLException;
 import java.sql.*;
 import java.sql.Statement;
 import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 
 public class LoginBean implements Serializable {
 	
 	private boolean logedIn = false;
-	private String uniqueID;
 	PersonBean person = new PersonBean();
+
+	private PreparedStatement statement;
 		
 	public LoginBean(){}
 	
@@ -46,11 +49,13 @@ public class LoginBean implements Serializable {
 		try{
 			  String query = "SELECT * FROM person Where [email]=? AND [userPassword]=? ";
 			  Connection connection = ConfigBean.getConnection();
-			  PreparedStatement statement = connection.prepareStatement(query);
+			  this.statement = connection.prepareStatement(query);
 			  statement.setString(1, person.getEmail());
 			  statement.setString(2, person.getUserPassword());
 			  ResultSet result = statement.executeQuery();
 			  
+			  
+			  //testing jdbc
 			  if(result.next())
 				{
 					logedIn = true;
@@ -71,31 +76,58 @@ public class LoginBean implements Serializable {
 	}
 	
 	
-	public void addUser(PersonBean newPerson)
+	public void addUser()
 	{
-		//it should be working but i havent test it yet 
-		uniqueID = UUID.randomUUID().toString();
+		int uniqueID;
+		uniqueID = ThreadLocalRandom.current().nextInt();
+		if((uniqueID == 0) || (uniqueID < 0))
+			{
+				if (uniqueID < 0)
+				{
+					uniqueID *= (-1);
+				}
+				uniqueID += 1;
+			}
+
+
+		
 		try{ 
-			  String query = "INSERT INTO person VALUES (?, ?, ?, ?, ?, ?, ?)";
+			  String query = "INSERT INTO person (personID, Fname, Lname, email, userPassword, phoneNo) VALUES (?, ?, ?, ?, ?, ?)";
 			  Connection connection = ConfigBean.getConnection();
-			  PreparedStatement statement = connection.prepareStatement(query);
+
+
+
+			  this.statement = connection.prepareStatement(query);
 			  
-			  statement.setString(1, uniqueID);
-			  statement.setString(2, newPerson.getFname());
-			  statement.setString(3, newPerson.getLname());
-			  statement.setString(4, newPerson.getEmail());
-			  statement.setString(5, newPerson.getUserPassword());
-			  statement.setInt(6, newPerson.getPhoneNo());
-			  statement.setString(7, newPerson.getRoleInSystem());
+			  this.statement.setString(1, String.valueOf(uniqueID));
+			this.statement.setString(2, person.getFname());
+			this.statement.setString(3, person.getLname());
+			this.statement.setString(4, person.getEmail());
+			this.statement.setString(5, person.getUserPassword());
+			this.statement.setString(6, person.getPhoneNo());
 			  
-			  statement.executeUpdate();
-			  statement.close();
-			  connection.close();
-		}
-		catch(SQLException e){
+			  System.out.println(person.getFname());
+			  System.out.println(person.getLname());
+			  System.out.println(person.getEmail());
+			  System.out.println(person.getUserPassword());
+			  System.out.println(person.getPhoneNo());
+			  System.out.println(uniqueID);
+
+			  System.out.println("aaa fdfddgrsehhers");
+
+			  this.statement.executeUpdate();
+
+			  connection.commit();
+
+			  this.statement.close();
+			    connection.close();
+		} catch(SQLException e) {
 			System.err.println(e.getMessage());
 			System.err.println(e.getStackTrace());	
-			};
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			System.err.println(e.getStackTrace());
+		}
 	}
 	
 }

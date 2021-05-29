@@ -10,19 +10,17 @@ public class PersonBean implements Serializable {
 	private String Lname;				 
 	private String email;				
 	private String userPassword;		
-	private int phoneNo;    			
-	private String roleInSystem;            
+	private String phoneNo;           
 
   public PersonBean(){}
   
-  public PersonBean(String nFname, String nLname, String nemail, String nuserPassword, int nphoneNo, String nroleInSystem){
+  public PersonBean(String nFname, String nLname, String nemail, String nuserPassword, String nphoneNo){
 	  
 	this.Fname = nFname;				 
 	this.Lname = nLname;				 
 	this.email = nemail;				
 	this.userPassword = nuserPassword;		
-	this.phoneNo = nphoneNo;    			
-	this.roleInSystem = nroleInSystem;	 
+	this.phoneNo = nphoneNo;    				 
   }
   
   public void setFname (String f){
@@ -45,14 +43,10 @@ public class PersonBean implements Serializable {
 	  this.userPassword = u;
   }
   
-  public void setPhoneNo (int p){
+  public void setPhoneNo (String p){
 	  this.phoneNo = p;
   }
   
-  public void setRoleInSystem (String r){
-	  
-	  this.roleInSystem = r;
-  }
   
   public String getFname(){
 	  
@@ -74,14 +68,9 @@ public class PersonBean implements Serializable {
 	  return userPassword;
   }
   
-    public int getPhoneNo(){
+    public String getPhoneNo(){
 	  
 	  return phoneNo;
-  }
-  
-    public String getRoleInSystem(){
-	  
-	  return roleInSystem;
   }
   
 

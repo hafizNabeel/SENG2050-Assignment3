@@ -35,10 +35,6 @@
 					<label>Password: </label><br/>
 					<input type="password" name ="password" required></input><br/><br/>
 					
-					<label>Job Title:: </label><br/>
-					<input type="text" name ="roleInSystem" required></input><br/><br/>
-					
-					
 					<button type="submit" name ="button" value="submit" >Submit</button><br/>
 				</form>
 		</div>
