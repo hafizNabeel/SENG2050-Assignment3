@@ -6,9 +6,6 @@ DROP DATABASE [SENG2050_IT_SERVICE];
 CREATE DATABASE [SENG2050_IT_SERVICE];
 USE SENG2050_IT_SERVICE;
 
-
-
-
 IF SUSER_ID(N'group18') IS NOT NULL
 BEGIN
 	DROP LOGIN [group18];
@@ -25,29 +22,7 @@ FOR LOGIN group18;
 
 
 
-GRANT SELECT, INSERT, UPDATE, DELETE TO grop18;
-
-
-IF OBJECT_ID(N'Comments', N'U') IS NOT NULL
-BEGIN
-	DROP TABLE [Comments];
-END
-
-CREATE TABLE Comments
-(
-	commentsId      VARCHAR(20),
-	personID			  VARCHAR(30),
-	description    char(300),
-	issueID				 VARCHAR(30),
-	PRIMARY KEY (commentsId),
-	FOREIGN KEY(issueID) REFERENCES Issues(issesId)
-	ON UPDATE CASCADE ON DELETE CASCADE,
-	FOREIGN KEY(personID) REFERENCES person(personID)
-	ON UPDATE CASCADE ON DELETE CASCADE,
-
-)
-go
-
+GRANT SELECT, INSERT, UPDATE, DELETE TO group18;
 
 
 IF OBJECT_ID(N'person', N'U') IS NOT NULL
@@ -90,11 +65,26 @@ CREATE TABLE Issues
 	dateSolved			char(30),
 	description      char(300),
 	FOREIGN KEY(personID) REFERENCES person(personID)
-	ON UPDATE CASCADE ON DELETE CASCADE
 )
 go
 
+IF OBJECT_ID(N'Comments', N'U') IS NOT NULL
+BEGIN
+	DROP TABLE [Comments];
+END
 
+CREATE TABLE Comments
+(
+	commentsId      VARCHAR(20),
+	personID			  VARCHAR(30),
+	description    char(300),
+	issueID				 VARCHAR(30),
+	PRIMARY KEY (commentsId),
+	FOREIGN KEY(issueID) REFERENCES Issues(issueId),
+	FOREIGN KEY(personID) REFERENCES person(personID)
+
+)
+go
 
 -- LOADING TO Person TABLE
 --Admins
@@ -103,7 +93,7 @@ VALUES ('1GldM', 'Scarlett', 'Messer', 'Scarlett@Messer.com', 'ScarlettMesser', 
 INSERT INTO person (personID, Fname, Lname, email, userPassword, phoneNo, roleInSystem)
 VALUES ('p9zUg', 'Danny', 'Eslinger', 'Danny@Eslinger.com', 'DannyEslinger', '0459349300', 'Admin')
 INSERT INTO person (personID, Fname, Lname, email, userPassword, phoneNo, roleInSystem)
-VALUES ('p9zUg', 'Danny', 'Eslinger', 'Danny@Eslinger.com', 'DannyEslinger', '0459349300', 'Admin')
+VALUES ('p9zUj', 'Danny', 'Eslinger', 'Danny@Eslinger.com', 'DannyEslinger', '0459349300', 'Admin')
 INSERT INTO person (personID, Fname, Lname, email, userPassword, phoneNo, roleInSystem)
 VALUES ('jYTBM', 'Bernita', 'Molina', 'Bernita@Molina.com', 'BernitaMolina', '0412348656', 'Admin')
 INSERT INTO person (personID, Fname, Lname, email, userPassword, phoneNo, roleInSystem)
