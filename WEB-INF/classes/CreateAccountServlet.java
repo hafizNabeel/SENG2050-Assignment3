@@ -17,7 +17,7 @@ import java.sql.*;
 import java.sql.Statement;
 
 @WebServlet(urlPatterns = {"/CreateAccountServlet"})
-public class LoginServlet extends HttpServlet {
+public class CreateAccountServlet extends HttpServlet {
 
 	@Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) 	throws ServletException, IOException {
@@ -37,13 +37,12 @@ public class LoginServlet extends HttpServlet {
 			String fiestName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			String phoneNumber = request.getParameter("phoneNumber");
-			PersonBean person = new PersonBean(fiestName, lastName, user, pass, phoneNumber, "User");
-		
-			//testing
-			LoginBean login = new LoginBean(person);
-			login.addUser(person);
 			
+			PersonBean person = new PersonBean();
 			
+			person.addUser(fiestName, lastName, user, pass, phoneNumber);
+			
+			// redircting to the log in page
 
 
     }

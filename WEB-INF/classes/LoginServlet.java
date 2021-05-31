@@ -34,16 +34,21 @@ public class LoginServlet extends HttpServlet {
 			
 			String user = request.getParameter("username");
 			String pass = request.getParameter("password");
+			
+			
 			PersonBean person = new PersonBean();
-			person.setEmail(user);
-			person.setUserPassword(pass);
+			person.login(user, pass);
 			
-			LoginBean login = new LoginBean(person);
-			
-			if(login.getLogedIn())
+			if(person.getStatus() == true)
 			{
-				
+				session.setAttribute("person", person);
+				response.sendRedirect("/SENG2050-assignment3/UserMenu");
 			}
+			// else show error message but we need to change it latter
+			else{
+				response.getWriter().println("Dump cunt invalid username or password");
+			}
+			
 
 
     }
