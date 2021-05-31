@@ -39,8 +39,8 @@ public class CreateAccountServlet extends HttpServlet {
 			String phoneNumber = request.getParameter("phoneNumber");
 			
 			PersonBean person = new PersonBean();
-			person.login(user, pass);
-			if(!person.getStatus())
+			
+			if(!person.exist(user))
 			{
 				person.addUser(fiestName, lastName, user, pass, phoneNumber);
 				session.setAttribute("person", person);

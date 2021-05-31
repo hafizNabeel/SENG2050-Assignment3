@@ -195,7 +195,34 @@ public class PersonBean implements Serializable {
 	}
 	
 	
-	
+	public boolean exist(String userName)
+	{
+		try{
+			  String query = "SELECT * FROM person Where [email]=? ";
+			  Connection connection = ConfigBean.getConnection();
+			  PreparedStatement statement = connection.prepareStatement(query);
+			  statement.setString(1, userName);
+			  ResultSet result = statement.executeQuery();
+			  
+			  if(result.next())
+			  {
+				result.close();
+				statement.close();
+				connection.close();
+				return true;
+			  }
+			  
+			result.close();
+			statement.close();
+			connection.close();
+			return false;			  
+			}catch(SQLException e)
+				{
+					System.err.println(e.getMessage());
+					System.err.println(e.getStackTrace());	
+				};
+		return false;
+	}
 	
 
   
