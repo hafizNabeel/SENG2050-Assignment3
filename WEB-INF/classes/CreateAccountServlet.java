@@ -39,8 +39,18 @@ public class CreateAccountServlet extends HttpServlet {
 			String phoneNumber = request.getParameter("phoneNumber");
 			
 			PersonBean person = new PersonBean();
+			person.login(user, pass);
+			if(!person.getStatus())
+			{
+				person.addUser(fiestName, lastName, user, pass, phoneNumber);
+				session.setAttribute("person", person);
+				response.sendRedirect("/SENG2050-assignment3/LoginServlet");
+			}
 			
-			person.addUser(fiestName, lastName, user, pass, phoneNumber);
+			else
+			{
+				response.getWriter().println("Dump cunt this account already exsi");
+			}
 			
 			// redircting to the log in page
 
