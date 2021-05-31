@@ -19,7 +19,7 @@
 		<div class="body">
 				<br />
 				<h3>To log in please enter valid username and paaswor</h3>
-				<form method = "post" action="MainPage">
+				<form method = "post" action="LoginServlet">
 					<label>User name:</label>
 					<input type="text" name ="username" required></input>
 					
