@@ -2,16 +2,17 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		
+
 		<title>IT Services Portal</title>
-		
+
 		<link rel="stylesheet" href="Style.css" type="text/css">
-		
+
 		<script> type="text/javascript"; src="validate.js"</script>
 
 		<div class="header">
-			<h1>Registration Form</h1>
-
+			<div class=NavBar>
+				<h1>IT Services Portal</h1>
+			</div>
 		</div>
 	</head>
 
@@ -22,23 +23,21 @@
 				<form method = "post" action="CreateAccountServlet">
 					<label>First name:</label><br/>
 					<input type="text" name ="firstName" required></input><br/><br/>
-					
+
 					<label>Last name:</label><br/>
 					<input type="text" name ="lastName" required></input><br/><br/>
-					
+
 					<label>Phone Number:</label><br/>
 					<input type="text" name ="phoneNumber" required></input><br/><br/>
-					
+
 					<label>Email:</label><br/>
 					<input type="text" name ="email" required></input><br/><br/>
-					
+
 					<label>Password: </label><br/>
 					<input type="password" name ="password" required></input><br/><br/>
-					
-					<label>Job Title:: </label><br/>
-					<input type="text" name ="roleInSystem" required></input><br/><br/>
-					
-					
+
+
+
 					<button type="submit" name ="button" value="submit" >Submit</button><br/>
 				</form>
 		</div>

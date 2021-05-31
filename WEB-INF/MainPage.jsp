@@ -10,8 +10,9 @@
 		<script> type="text/javascript"; src="validate.js"</script>
 
 		<div class="header">
-			<h1>IT Services Portal</h1>
-
+			<div class=NavBar>
+				<h1>IT Services Portal</h1>
+			</div>
 		</div>
 	</head>
 
@@ -26,8 +27,9 @@
 				</form>
 		</div>
 	</body>
-	<footer>
-		<p2 class="footer" >&copy; Group number 18</p2><br/>
-		<p3 class="email" >Group-number-18@uon.edu.au</p3>
+	<footer id="footer">
+		<p><b>Company: Group 18 <br>
+			Email: Group18@something.com.au </b>
+		<br>  Copyright &copy; 2021 </p>
 	</footer>
 </html>

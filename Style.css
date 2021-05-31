@@ -1,16 +1,24 @@
-html{
-	background-color:#C5F4E0;
-	background-repeat: no-repeat;
-	background-size: cover;
-	}
-	
-.header{
+
+.NavBar{
+	background-color: #2D2D2A;
+	overflow: hidden;
+	text-align: left;
+	width: 100%;
+	color: #FF4A1C;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+/* .header{
 	text-align:center;
 	color:#b72020;
 
-}
+} */
 
-.body{
+body{
+	padding-top: 65px;
+	background-color:#E5DCC5;
 	text-align:center;
 
 }
@@ -30,10 +38,14 @@ input.comments{
 
 
 footer{
-	text-align:left;
-	position: absolute;
-	bottom: 0;
-	color: black;
+	background-color: #2D2D2A;
+  text-align: right;
+  color: #FF4A1C;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
 
 }
 
@@ -41,16 +53,12 @@ footer{
 
 button{
 	border: 5px solid transparent;
-    background: #1a3c6f;
-    color: white;
+    background: #2D2D2A;
+    color: #FF4A1C;
     border-radius: 50px;
     width: 25%;
     cursor: pointer;
-	margin: 1px;
-	border-radius: 5px;
-	
-  }
-  
+		margin: 1px;
+		border-radius: 5px;
 
- 
- 
+  }

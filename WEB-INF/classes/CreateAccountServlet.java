@@ -31,27 +31,27 @@ public class CreateAccountServlet extends HttpServlet {
 
 			HttpSession session = request.getSession();
 			RequestDispatcher requestDispatcher;
-			
+
 			String user = request.getParameter("username");
 			String pass = request.getParameter("password");
 			String fiestName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			String phoneNumber = request.getParameter("phoneNumber");
-			
+
 			PersonBean person = new PersonBean();
-			
-			if(!person.exist(user))
+
+			if(person.exist(user))
 			{
 				person.addUser(fiestName, lastName, user, pass, phoneNumber);
 				session.setAttribute("person", person);
 				response.sendRedirect("/SENG2050-assignment3/LoginServlet");
 			}
-			
+
 			else
 			{
 				response.getWriter().println("Dump cunt this account already exsi");
 			}
-			
+
 			// redircting to the log in page
 
 
