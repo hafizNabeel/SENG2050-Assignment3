@@ -32,7 +32,7 @@ public class CreateAccountServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			RequestDispatcher requestDispatcher;
 
-			String user = request.getParameter("username");
+			String user = request.getParameter("email");
 			String pass = request.getParameter("password");
 			String fiestName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
@@ -40,11 +40,11 @@ public class CreateAccountServlet extends HttpServlet {
 
 			PersonBean person = new PersonBean();
 
-			if(person.exist(user))
+			if(!person.exist(user))
 			{
 				person.addUser(fiestName, lastName, user, pass, phoneNumber);
 				session.setAttribute("person", person);
-				response.sendRedirect("/SENG2050-assignment3/LoginServlet");
+				response.sendRedirect("/SENG2050-Assignment3/LoginServlet");
 			}
 
 			else

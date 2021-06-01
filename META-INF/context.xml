@@ -4,5 +4,5 @@
     username="group18"
     password="mySecur3Passw0rd!"
     driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    url="jdbc:sqlserver://localhost;databaseName=SENG2050_IT_SERVICE"  />
+    url="jdbc:sqlserver://localhost\SQLEXPRESS;databaseName=SENG2050_IT_SERVICE"  />
 </Context>
