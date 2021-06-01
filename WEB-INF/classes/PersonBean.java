@@ -207,13 +207,13 @@ public class PersonBean implements Serializable {
         try {
             MessageDigest messagedigest = MessageDigest.getInstance("SHA-224");
             byte[] messageDigest = messagedigest.digest(needtohash.getBytes());
-            BigInteger no = new BigInteger(1, messageDigest);
-            String hashtext = no.toString(16);
+            BigInteger intNum = new BigInteger(1, messageDigest);
+            String hashedText = intNum.toString(16);
   
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
+            while (hashedText.length() < 32) {
+                hashedText = "0" + hashedText;
             }
-            return hashtext;
+            return hashedText;
         }
         catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
