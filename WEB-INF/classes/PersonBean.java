@@ -15,8 +15,8 @@ import java.security.NoSuchAlgorithmException;
 public class PersonBean implements Serializable {
 
 	private String personID;
-	private String Fname;
-	private String Lname;
+	private String fname;
+	private String lname;
 	private String email;
 	private String userPassword;
 	private String phoneNo;
@@ -30,12 +30,13 @@ public class PersonBean implements Serializable {
 	public PersonBean(String nFname, String nLname, String nemail, String nuserPassword, String nphoneNo,
 			String nroleInSystem) {
 
-		this.Fname = nFname;
-		this.Lname = nLname;
+		this.fname = nFname;
+		this.lname = nLname;
 		this.email = nemail;
 		this.userPassword = nuserPassword;
 		this.phoneNo = nphoneNo;
 		this.roleInSystem = nroleInSystem;
+		this.status = false;
 	}
 
 	public void setStatus(boolean v) {
@@ -50,12 +51,12 @@ public class PersonBean implements Serializable {
 
 	public void setFname(String f) {
 
-		this.Fname = f;
+		this.fname = f;
 	}
 
 	public void setLname(String l) {
 
-		this.Lname = l;
+		this.lname = l;
 	}
 
 	public void setEmail(String e) {
@@ -89,12 +90,12 @@ public class PersonBean implements Serializable {
 
 	public String getFname() {
 
-		return Fname;
+		return fname;
 	}
 
 	public String getLname() {
 
-		return Lname;
+		return lname;
 	}
 
 	public String getEmail() {

@@ -11,7 +11,7 @@
 
 		<div class="header">
 			<div class=NavBar>
-				<h1>IT Services Portal</h1>
+				<a href="/SENG2050-Assignment3/UserMenu"> <h1>IT Services Portal</h1> </a>
 			</div>
 		</div>
 	</head>
