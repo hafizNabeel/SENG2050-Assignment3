@@ -21,37 +21,19 @@ public class CreateAccountServlet extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-			String user = request.getParameter("email");
-			String pass = request.getParameter("password");
-			String fiestName = request.getParameter("firstName");
-			String lastName = request.getParameter("lastName");
-			String phoneNumber = request.getParameter("phoneNumber");
-		HttpSession session = request.getSession();
-		RequestDispatcher requestDispatcher;
-
-		String user = request.getParameter("username");
+		String user = request.getParameter("email");
 		String pass = request.getParameter("password");
 		String fiestName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String phoneNumber = request.getParameter("phoneNumber");
-
-			if(!person.exist(user))
-			{
-				person.addUser(fiestName, lastName, user, pass, phoneNumber);
-				session.setAttribute("person", person);
-				response.sendRedirect("/SENG2050-Assignment3/LoginServlet");
-			}
+		HttpSession session = request.getSession();
 
 		PersonBean person = new PersonBean();
-
 		if (!person.exist(user)) {
-			System.out.println("hello " + user);
 			person.addUser(fiestName, lastName, user, pass, phoneNumber);
 			session.setAttribute("person", person);
-			response.sendRedirect("/SENG2050-assignment3/LoginServlet");
-		}
-
-		else {
+			response.sendRedirect("/SENG2050-Assignment3/LoginServlet");
+		} else {
 			response.getWriter().println("Dump cunt this account already exsi");
 		}
 
