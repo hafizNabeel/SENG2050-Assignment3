@@ -1,42 +1,36 @@
-import java.util.*;
-import java.sql.*;
-import javax.sql.*;
-import java.io.*;
-
+import java.io.Serializable;
 
 public class CommentsBean implements Serializable {
-	
-	private String personID;	
-	private String description;
-    
 
-  public CommentsBean(){}
-  
-  public CommentsBean(String pd, String nd){
-	  
-	  this.personID = pd;
-	  this.description = nd;
-	  
+  private String personID;
+  private String description;
+
+  public CommentsBean() {
   }
-  
-  public void setPersonId(String pd){
-	  
-	  personID = pd;
+
+  public CommentsBean(String pd, String nd) {
+
+    this.personID = pd;
+    this.description = nd;
+
   }
-  
-  public void setDescription(String nd){
-	  
-	  description = nd;
+
+  public void setPersonId(String pd) {
+
+    personID = pd;
   }
-  
-  public String getPersonId(){
-	  return personID;
+
+  public void setDescription(String nd) {
+
+    description = nd;
   }
-  
-  public String getDescription(){
-	  return description;
+
+  public String getPersonId() {
+    return personID;
   }
-  
-  
-  
+
+  public String getDescription() {
+    return description;
+  }
+
 }

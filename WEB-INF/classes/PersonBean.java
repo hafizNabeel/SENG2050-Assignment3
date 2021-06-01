@@ -1,24 +1,9 @@
-import java.util.*;
-import java.sql.*;
-import javax.sql.*;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.Scanner;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.text.SimpleDateFormat;
-import java.io.*;
-import java.util.Random;
+import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.*;
-import java.sql.Statement;
 import java.util.concurrent.ThreadLocalRandom;
-
 
 public class PersonBean implements Serializable {
 
@@ -31,111 +16,109 @@ public class PersonBean implements Serializable {
 	private String roleInSystem;
 	private boolean status = false;
 
-  public PersonBean(){}
+	public PersonBean() {
+	}
 
-  public PersonBean(String nFname, String nLname, String nemail, String nuserPassword, String nphoneNo, String nroleInSystem){
+	public PersonBean(String nFname, String nLname, String nemail, String nuserPassword, String nphoneNo,
+			String nroleInSystem) {
 
-	this.Fname = nFname;
-	this.Lname = nLname;
-	this.email = nemail;
-	this.userPassword = nuserPassword;
-	this.phoneNo = nphoneNo;
-	this.roleInSystem = nroleInSystem;
-  }
+		this.Fname = nFname;
+		this.Lname = nLname;
+		this.email = nemail;
+		this.userPassword = nuserPassword;
+		this.phoneNo = nphoneNo;
+		this.roleInSystem = nroleInSystem;
+	}
 
-   public void setStatus (boolean v){
+	public void setStatus(boolean v) {
 
-	  this.status = v;
-  }
+		this.status = v;
+	}
 
-  public void setPersonId (String id){
+	public void setPersonId(String id) {
 
-	  this.personID = id;
-  }
+		this.personID = id;
+	}
 
-  public void setFname (String f){
+	public void setFname(String f) {
 
-	  this.Fname = f;
-  }
+		this.Fname = f;
+	}
 
-  public void setLname (String l){
+	public void setLname(String l) {
 
-	  this.Lname = l;
-  }
+		this.Lname = l;
+	}
 
-  public void setEmail (String e){
+	public void setEmail(String e) {
 
-	  this.email = e;
-  }
+		this.email = e;
+	}
 
-  public void setUserPassword (String u){
+	public void setUserPassword(String u) {
 
-	  this.userPassword = u;
-  }
+		this.userPassword = u;
+	}
 
-  public void setPhoneNo (String p){
-	  this.phoneNo = p;
-  }
+	public void setPhoneNo(String p) {
+		this.phoneNo = p;
+	}
 
-  public void setRoleInSystem (String r){
+	public void setRoleInSystem(String r) {
 
-	  this.roleInSystem = r;
-  }
+		this.roleInSystem = r;
+	}
 
-    public boolean getStatus(){
+	public boolean getStatus() {
 
-	  return status;
-  }
+		return status;
+	}
 
-    public String getPersonId(){
+	public String getPersonId() {
 
-	  return personID;
-  }
+		return personID;
+	}
 
-  public String getFname(){
+	public String getFname() {
 
-	  return Fname;
-  }
+		return Fname;
+	}
 
-    public String getLname(){
+	public String getLname() {
 
-	  return Lname;
-  }
+		return Lname;
+	}
 
-    public String getEmail(){
+	public String getEmail() {
 
-	  return email;
-  }
+		return email;
+	}
 
-    public String getUserPassword(){
+	public String getUserPassword() {
 
-	  return userPassword;
-  }
+		return userPassword;
+	}
 
-    public String getPhoneNo(){
+	public String getPhoneNo() {
 
-	  return phoneNo;
-  }
+		return phoneNo;
+	}
 
-    public String getRoleInSystem(){
+	public String getRoleInSystem() {
 
-	  return roleInSystem;
-  }
+		return roleInSystem;
+	}
 
+	public void login(String userName, String password) {
+		try {
+			String query = "SELECT * FROM person Where [email]=? AND [userPassword]=? ";
+			Connection connection = ConfigBean.getConnection();
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, userName);
+			statement.setString(2, password);
+			ResultSet result = statement.executeQuery();
 
-
-  	public void login(String userName, String password)
-	{
-		try{
-			  String query = "SELECT * FROM person Where [email]=? AND [userPassword]=? ";
-			  Connection connection = ConfigBean.getConnection();
-			  PreparedStatement statement = connection.prepareStatement(query);
-			  statement.setString(1, userName);
-			  statement.setString(2, password);
-			  ResultSet result = statement.executeQuery();
-
-			  while(result.next())
-			  {
+			while (result.next()) {
 				status = true;
 				this.setPersonId(result.getString("personID"));
 				this.setFname(result.getString("Fname"));
@@ -144,88 +127,79 @@ public class PersonBean implements Serializable {
 				this.setPhoneNo(result.getString("phoneNo"));
 				this.setUserPassword(result.getString("userPassword"));
 				this.setRoleInSystem(result.getString("roleInSystem"));
-			  }
-
-			  result.close();
-			  statement.close();
-			  connection.close();
 			}
-
-		catch(SQLException e){
-			System.err.println(e.getMessage());
-			System.err.println(e.getStackTrace());
-			};
-	}
-
-	public void addUser(String fn, String ln, String em, String pass, String pn)
-	{
-		int uniqueID;
-		uniqueID = ThreadLocalRandom.current().nextInt();
-		if((uniqueID == 0) || (uniqueID < 0))
-			{
-				if (uniqueID < 0)
-				{
-					uniqueID *= (-1);
-				}
-				uniqueID += 1;
-			}
-
-		try
-			{
-				  String query = "INSERT INTO person VALUES (?, ?, ?, ?, ?, ?, ?)";
-				  Connection connection = ConfigBean.getConnection();
-				  PreparedStatement statement = connection.prepareStatement(query);
-
-				  statement.setInt(1, uniqueID);
-				  statement.setString(2, fn);
-				  statement.setString(3, ln);
-				  statement.setString(4, em);
-				  statement.setString(5, pass);
-				  statement.setString(6, pn);
-				  statement.setString(7, "User");
-
-				  statement.executeUpdate();
-				  statement.close();
-				  connection.close();
-
-			}catch(SQLException e){
-			System.err.println(e.getMessage());
-			System.err.println(e.getStackTrace());
-			};
-	}
-
-
-	public boolean exist(String userName)
-	{
-    boolean check = false;
-		try{
-			  String query = "SELECT * FROM person Where [email]=? ";
-			  Connection connection = ConfigBean.getConnection();
-			  PreparedStatement statement = connection.prepareStatement(query);
-			  statement.setString(1, userName);
-			  ResultSet result = statement.executeQuery();
-
-			  if(result.next())
-			  {
-				result.close();
-				statement.close();
-				connection.close();
-				check = true;
-			  }
 
 			result.close();
 			statement.close();
 			connection.close();
-			}catch(SQLException e)
-				{
-					System.err.println(e.getMessage());
-					System.err.println(e.getStackTrace());
-				};
-		return check;
+		}
+
+		catch (SQLException e) {
+			System.err.println(e.getMessage());
+			System.err.println(e.getStackTrace());
+		}
+		;
 	}
 
+	public void addUser(String fn, String ln, String em, String pass, String pn) {
+		int uniqueID;
+		uniqueID = ThreadLocalRandom.current().nextInt();
+		if ((uniqueID == 0) || (uniqueID < 0)) {
+			if (uniqueID < 0) {
+				uniqueID *= (-1);
+			}
+			uniqueID += 1;
+		}
 
+		try {
+			String query = "INSERT INTO person VALUES (?, ?, ?, ?, ?, ?, ?)";
+			Connection connection = ConfigBean.getConnection();
+			PreparedStatement statement = connection.prepareStatement(query);
 
+			statement.setInt(1, uniqueID);
+			statement.setString(2, fn);
+			statement.setString(3, ln);
+			statement.setString(4, em);
+			statement.setString(5, pass);
+			statement.setString(6, pn);
+			statement.setString(7, "User");
 
+			statement.executeUpdate();
+			statement.close();
+			connection.close();
+
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			System.err.println(e.getStackTrace());
+		}
+		;
+	}
+
+	public boolean exist(String userName) {
+		boolean check = false;
+		try {
+			String query = "SELECT * FROM person Where [email]=? ";
+			Connection connection = ConfigBean.getConnection();
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, userName);
+			ResultSet result = statement.executeQuery();
+
+			if (result.next()) {
+				result.close();
+				statement.close();
+				connection.close();
+				check = true;
+			}
+
+			result.close();
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			System.err.println(e.getStackTrace());
+		}
+		;
+		return check;
+	}
 
 }
