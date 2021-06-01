@@ -14,6 +14,7 @@ public class Main extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.removeAttribute("person");
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/MainPage.jsp");
 		requestDispatcher.forward(request, response);
 	}

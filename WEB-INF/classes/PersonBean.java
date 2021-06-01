@@ -28,6 +28,7 @@ public class PersonBean implements Serializable {
 		this.userPassword = nuserPassword;
 		this.phoneNo = nphoneNo;
 		this.roleInSystem = nroleInSystem;
+		this.status = false;
 	}
 
 	public void setStatus(boolean v) {

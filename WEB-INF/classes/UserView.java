@@ -20,11 +20,13 @@ public class UserView extends HttpServlet {
 		RequestDispatcher requestDispatcher;
 		HttpSession session = request.getSession();
 		PersonBean user = (PersonBean) session.getAttribute("person");
-		if (user.getStatus()) {
-			requestDispatcher = request.getRequestDispatcher("/WEB-INF/userView.jsp");
-			requestDispatcher.forward(request, response);
+		if (user != null) {
+			if (user.getStatus()) {
+				requestDispatcher = request.getRequestDispatcher("/WEB-INF/userView.jsp");
+				requestDispatcher.forward(request, response);
+			}
 		} else {
-			response.sendRedirect("/SENG2050-assignment3/MainPage");
+			response.sendRedirect("/SENG2050-Assignment3/MainPage");
 		}
 
 	}
