@@ -5,6 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ThreadLocalRandom;
 
+import java.math.BigInteger; 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest; 
+import java.security.NoSuchAlgorithmException; 
+
+
+
 public class PersonBean implements Serializable {
 
 	private String personID;
@@ -15,6 +22,7 @@ public class PersonBean implements Serializable {
 	private String phoneNo;
 	private String roleInSystem;
 	private boolean status = false;
+
 
 	public PersonBean() {
 	}
@@ -142,27 +150,18 @@ public class PersonBean implements Serializable {
 	}
 
 	public void addUser(String fn, String ln, String em, String pass, String pn) {
-		int uniqueID;
-		uniqueID = ThreadLocalRandom.current().nextInt();
-		if ((uniqueID == 0) || (uniqueID < 0)) {
-			if (uniqueID < 0) {
-				uniqueID *= (-1);
-			}
-			uniqueID += 1;
-		}
 
 		try {
-			String query = "INSERT INTO person VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO person VALUES (NEWID(), ?, ?, ?, ?, ?, ?)";
 			Connection connection = ConfigBean.getConnection();
 			PreparedStatement statement = connection.prepareStatement(query);
 
-			statement.setInt(1, uniqueID);
-			statement.setString(2, fn);
-			statement.setString(3, ln);
-			statement.setString(4, em);
-			statement.setString(5, pass);
-			statement.setString(6, pn);
-			statement.setString(7, "User");
+			statement.setString(1, fn);
+			statement.setString(2, ln);
+			statement.setString(3, em);
+			statement.setString(4, pass);
+			statement.setString(5, pn);
+			statement.setString(6, "User");
 
 			statement.executeUpdate();
 			statement.close();
@@ -197,9 +196,33 @@ public class PersonBean implements Serializable {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 			System.err.println(e.getStackTrace());
-		}
-		;
+		};
 		return check;
 	}
+	
+	
+	//hashing algorithm SHA-224
+   public String hashPassword(String needtohash)
+    {
+        try {
+            MessageDigest messagedigest = MessageDigest.getInstance("SHA-224");
+            byte[] messageDigest = messagedigest.digest(needtohash.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashtext = no.toString(16);
+  
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+	
+	
+  }
 
-}
+
+
+

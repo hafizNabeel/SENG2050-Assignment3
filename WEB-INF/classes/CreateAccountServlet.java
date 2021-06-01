@@ -22,7 +22,7 @@ public class CreateAccountServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String user = request.getParameter("email");
-		String pass = request.getParameter("password");
+		String tempPass = request.getParameter("password");
 		String fiestName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String phoneNumber = request.getParameter("phoneNumber");
@@ -30,6 +30,9 @@ public class CreateAccountServlet extends HttpServlet {
 
 		PersonBean person = new PersonBean();
 		if (!person.exist(user)) {
+			
+			String pass = person.hashPassword(tempPass);
+			System.out.println(pass);
 			person.addUser(fiestName, lastName, user, pass, phoneNumber);
 			session.setAttribute("person", person);
 			response.sendRedirect("/SENG2050-Assignment3/LoginServlet");

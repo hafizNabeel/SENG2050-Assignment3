@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 		String pass = request.getParameter("password");
 
 		PersonBean person = new PersonBean();
-		person.login(user, pass);
+		person.login(user, person.hashPassword(pass));
 
 		if (person.getStatus() == true) {
 			session.setAttribute("person", person);

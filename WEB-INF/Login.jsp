@@ -26,7 +26,7 @@
 
 					<label>Password: </label>
 					<input type="password" name ="password" required></input><br/>
-					<button type="submit" name ="button" value="submit" >Submit</button><br/>
+					<br/><button type="submit" name ="button" value="submit" >Submit</button><br/>
 				</form>
 		</div>
 	</body>
