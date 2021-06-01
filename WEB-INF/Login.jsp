@@ -19,7 +19,10 @@
 	<body>
 		<div class="body">
 				<br />
-				<h3>To log in please enter valid username and paaswor</h3>
+				<h3>To log in please enter valid username and password</h3>
+				<div class="error">
+					<p> ${sessionScope.ERROR} </p>
+				</div>
 				<form method = "post" action="LoginServlet">
 					<label>User name:</label>
 					<input type="text" name ="username" required></input>

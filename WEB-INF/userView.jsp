@@ -14,7 +14,7 @@
 				<a href="/SENG2050-Assignment3/UserMenu"> <h1>IT Services Portal</h1> </a>
                 <a href="/SENG2050-Assignment3/IssueList">View Issues</a>
                 <a href="/SENG2050-Assignment3/KBase">Knowledge Base</a>
-                <a href="/SENG2050-Assignment3/CreateIssue">Open new Issues</a>
+                <a href="/SENG2050-Assignment3/CreateIssue">Open New Issues</a>
                 <a href="/SENG2050-Assignment3/MainPage">Log Out</a>
 			</div>
 		</div>

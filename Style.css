@@ -58,6 +58,9 @@ footer {
   right: 0;
   height: 100px;
 }
+.error {
+  color: red;
+}
 
 button {
   border: 5px solid transparent;

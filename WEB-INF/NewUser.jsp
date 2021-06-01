@@ -20,6 +20,9 @@
 		<div class="body">
 				<br />
 				<h3>Please fill up all the required details to be able to register with us</h3>
+				<div class="error">
+					<p> ${sessionScope.ERROR} </p>
+				</div>
 				<form method = "post" action="CreateAccountServlet">
 					<label>First name:</label><br/>
 					<input type="text" name ="firstName" required></input><br/><br/>

@@ -1,16 +1,11 @@
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.ThreadLocalRandom;
-
-import java.math.BigInteger; 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest; 
-import java.security.NoSuchAlgorithmException; 
-
-
 
 public class PersonBean implements Serializable {
 
@@ -22,7 +17,6 @@ public class PersonBean implements Serializable {
 	private String phoneNo;
 	private String roleInSystem;
 	private boolean status = false;
-
 
 	public PersonBean() {
 	}
@@ -197,33 +191,26 @@ public class PersonBean implements Serializable {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 			System.err.println(e.getStackTrace());
-		};
+		}
+		;
 		return check;
 	}
-	
-	
-	//hashing algorithm SHA-224
-   public String hashPassword(String needtohash)
-    {
-        try {
-            MessageDigest messagedigest = MessageDigest.getInstance("SHA-224");
-            byte[] messageDigest = messagedigest.digest(needtohash.getBytes());
-            BigInteger no = new BigInteger(1, messageDigest);
-            String hashtext = no.toString(16);
-  
-            while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
-            }
-            return hashtext;
-        }
-        catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-	
-	
-  }
 
+	// hashing algorithm SHA-224
+	public String hashPassword(String needtohash) {
+		try {
+			MessageDigest messagedigest = MessageDigest.getInstance("SHA-224");
+			byte[] messageDigest = messagedigest.digest(needtohash.getBytes());
+			BigInteger no = new BigInteger(1, messageDigest);
+			String hashtext = no.toString(16);
 
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-
+}
