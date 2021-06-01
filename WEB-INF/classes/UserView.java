@@ -20,8 +20,9 @@ public class UserView extends HttpServlet {
 		RequestDispatcher requestDispatcher;
 		HttpSession session = request.getSession();
 		PersonBean user = (PersonBean) session.getAttribute("person");
-		if (user != null) {
+		if (user != null || session == null) {
 			if (user.getStatus()) {
+				// session.setAttribute("person", user);
 				requestDispatcher = request.getRequestDispatcher("/WEB-INF/userView.jsp");
 				requestDispatcher.forward(request, response);
 			}
@@ -35,7 +36,6 @@ public class UserView extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String choise = request.getParameter("button");
-		HttpSession session = request.getSession();
 		RequestDispatcher requestDispatcher;
 		if (choise.equals("login")) {
 			requestDispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
