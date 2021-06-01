@@ -11,7 +11,11 @@
 
 		<div class="header">
 			<div class=NavBar>
-				<h1>IT Services Portal</h1>
+				<a href="/SENG2050-Assignment3/UserMenu"> <h1>IT Services Portal</h1> </a>
+                <a href="/SENG2050-Assignment3/IssueList">View Issues</a>
+                <a href="/SENG2050-Assignment3/KBase">Knowledge Base</a>
+                <a href="/SENG2050-Assignment3/CreateIssue">Open New Issues</a>
+                <a href="/SENG2050-Assignment3/MainPage">Log Out</a>
 			</div>
 		</div>
 	</head>
@@ -19,7 +23,7 @@
 	<body>
 		<div class="body">
 				<br />
-				<h3>This is the user view mate</h3>
+				<h3>Welcome to IT Portal ${sessionScope.person.fname}</h3>
 		</div>
 	</body>
 	<footer id="footer">

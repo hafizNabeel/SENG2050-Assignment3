@@ -13,7 +13,6 @@ public class CreateAccountServlet extends HttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/NewUser.jsp");
 		requestDispatcher.forward(request, response);
 	}
@@ -30,14 +29,16 @@ public class CreateAccountServlet extends HttpServlet {
 
 		PersonBean person = new PersonBean();
 		if (!person.exist(user)) {
-			
+
 			String pass = person.hashPassword(tempPass);
 			System.out.println(pass);
 			person.addUser(fiestName, lastName, user, pass, phoneNumber);
 			session.setAttribute("person", person);
 			response.sendRedirect("/SENG2050-Assignment3/LoginServlet");
 		} else {
-			response.getWriter().println("Dump cunt this account already exsi");
+			session.setAttribute("ERROR", "This account already exists please try again");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/NewUser.jsp");
+			requestDispatcher.forward(request, response);
 		}
 
 		// redircting to the log in page

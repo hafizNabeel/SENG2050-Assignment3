@@ -14,6 +14,10 @@ public class Main extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.removeAttribute("person");
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+		response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+		response.setHeader("Expires", "0");
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/MainPage.jsp");
 		requestDispatcher.forward(request, response);
 	}
@@ -22,7 +26,6 @@ public class Main extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String choise = request.getParameter("button");
-		HttpSession session = request.getSession();
 		RequestDispatcher requestDispatcher;
 		if (choise.equals("login")) {
 			requestDispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");

@@ -14,6 +14,8 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		session.removeAttribute("ERROR");
+		session.removeAttribute("person");
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
 		requestDispatcher.forward(request, response);
 	}
@@ -22,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		RequestDispatcher requestDispatcher;
 
 		String user = request.getParameter("username");
 		String pass = request.getParameter("password");
@@ -32,11 +33,14 @@ public class LoginServlet extends HttpServlet {
 
 		if (person.getStatus() == true) {
 			session.setAttribute("person", person);
+			session.removeAttribute("ERROR");
 			response.sendRedirect("/SENG2050-Assignment3/UserMenu");
 		}
 		// else show error message but we need to change it latter
 		else {
-			response.getWriter().println("Dump cunt invalid username or password");
+			session.setAttribute("ERROR", "The Login has failed, the username or password is Incorrect");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
+			requestDispatcher.forward(request, response);
 		}
 
 	}
