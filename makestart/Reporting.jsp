@@ -1,4 +1,10 @@
+
+<%
+Boolean success = (Boolean) request.getAttribute("success");
+String Message = (String) request.getAttribute("Message");
+%>
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
@@ -8,7 +14,8 @@
 		<link rel="stylesheet" href="Style.css" type="text/css">
 		
 		<script> type="text/javascript"; src="validate.js"</script>
-
+		<script src="https://code.jquery.com/jquery-1.10.2.js"
+		type="text/javascript"></script>
 		<div class="header">
 			<h1>Reporting Form</h1>
 
@@ -18,9 +25,9 @@
 	<body>
 		<div class="body">
 				<br />
-				<h3>Please fill up all the requrid details to report an issue</h3>
-				<form method = "post" action="Login">
-					  <label for="issues">Please selesct one of the listed issues that you wish to report :</label>
+				<h3>Please fill up all the requreid details to report an issue</h3>
+				<form method = "post" action="ReportingPage">
+					  <label for="issues">Please select one of the listed issues that you wish to report :</label>
 						<select name="issue" id="issue" >
 							<option value="Network">Network issues</option>
 							<option value="Software">Software issues</option>
@@ -28,6 +35,11 @@
 							<option value="Email">Email issues</option>
 							<option value="Account">Account issues</option>
 							<option value="Other">Other issues</option>
+						</select>
+						<br/>
+						<label for="subissues">Please select Sub Category :</label>
+						<select name="subissue" id="subissues" >
+							<option value=""></option>
 						</select>
 						<br/><br/>
 						<label>First name:</label>
@@ -78,12 +90,52 @@
 
 							timeAndDate();
 							setInterval(timeAndDate,1000);
+
+							$('#issue').on('change', function(){
+                            $('#subissues').html('');
+							
+							if($('#issue').val()== "Network"){
+                            $('#subissues').append('<option value="Internet">Internet issues</option>');
+                            $('#subissues').append('<option value="Wifi">Wifi Issue</option>');
+                            $('#subissues').append('<option value="System">System Issue</option>');
+                              }
+
+                            if($('#issue').val()== "Software"){
+                            $('#subissues').append('<option value="Email">Email issues</option>');
+                            $('#subissues').append('<option value="Crash">Software Crash Issue</option>');
+                            $('#subissues').append('<option value="Storage">Storage Issue</option>');
+                            }
+							 
+                            if($('#issue').val()== "Hardware"){
+                            $('#subissues').append('<option value="Printing">Printing issues</option>');
+                            $('#subissues').append('<option value="Hard">Hard Drive Issue</option>');
+                            $('#subissues').append('<option value="LCD">LCD Issue</option>');
+                            } 
+							if($('#issue').val()== "Email"){
+                            $('#subissues').append('<option value="Email">Email issues</option>');
+                            $('#subissues').append('<option value="Forget">Forget Password Issue</option>');
+                            $('#subissues').append('<option value="Request">Request Login</option>');
+                            } 
+							if($('#issue').val()== "Account"){
+                            $('#subissues').append('<option value="Account">Account issues</option>');
+                            $('#subissues').append('<option value="Crash">Software Crash Issue</option>');
+                            } 
+                            });
 						</script>
-						
 					</div>
 					<br/>
 					<button type="submit" name ="button" value="submit" >Submit</button><br/>
 				</form>
+				<%
+				//Display Messages/Errors on Home screen while playing Game
+				if (Message != null) {
+				%>
+				<p>
+					<em><%=Message%></em>
+				</p>
+				<%
+				}
+				%>
 		</div>
 	</body>
 	<footer>
