@@ -2,10 +2,13 @@ import java.io.Serializable;
 
 public class IssuesBean implements Serializable {
 
+	private String issueId;
+	private String personId;
 	private String issesState;
 	private String category;
 	private String subCategory;
 	private String title;
+	private String description;
 	private String reslotionDetails;
 	private String dateReported;
 	private String timeReported;
@@ -26,9 +29,21 @@ public class IssuesBean implements Serializable {
 		this.dateSolved = ndateSolved;
 	}
 
+	public void setIssueId(String id) {
+		this.issueId = id;
+	}
+
+	public void setPersonId(String id) {
+		this.personId = id;
+	}
+
 	public void setIssesState(String i) {
 
 		dateSolved = i;
+	}
+
+	public void setDescription(String d) {
+		this.description = d;
 	}
 
 	public void setCategory(String c) {
@@ -64,6 +79,18 @@ public class IssuesBean implements Serializable {
 	public void setDateSolved(String ds) {
 
 		dateSolved = ds;
+	}
+
+	public String getIssueId() {
+		return issueId;
+	}
+
+	public String getPersonId() {
+		return personId;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	public String getIssesState() {
